@@ -3,9 +3,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useMoralis } from "react-moralis";
 import { Button } from "@chakra-ui/button";
-import { Heading, Container } from "@chakra-ui/layout";
+import { Heading, Container, Box } from "@chakra-ui/layout";
 
-import { EventsDashboard } from "./containers/EventsDashboard";
+import { BurbsDashboard } from "./containers/BurbsDashboard";
 
 function App() {
   const {
@@ -35,29 +35,31 @@ function App() {
     console.log("logged out");
   };
 
-  if (isAuthenticated) {
+  const headerJSX = () => {
     return (
-      <Container maxW="container.md">
-        <Heading>TwentyTwentyTwo Moonbags</Heading>
+      <Box>
+        <Heading textAlign='center'>Burb Rarity Link Generator</Heading>
         <Button isLoading={isAuthenticating} onClick={login}>
           Metamask Login
         </Button>
         <Button onClick={logOut} disabled={isAuthenticating}>
           Logout
         </Button>
-        <EventsDashboard />
+      </Box>
+    )
+  }
+
+  if (isAuthenticated) {
+    return (
+      <Container maxW="container.md">
+        {headerJSX()}
+        <BurbsDashboard />
       </Container>
     );
   }
   return (
     <Container maxW="container.md">
-      <Heading>TwentyTwentyTwo Moonbags</Heading>
-      <Button isLoading={isAuthenticating} onClick={login}>
-        Metamask Login
-      </Button>
-      <Button onClick={logOut} disabled={isAuthenticating}>
-        Logout
-      </Button>
+      {headerJSX()}
     </Container>
   );
 }
