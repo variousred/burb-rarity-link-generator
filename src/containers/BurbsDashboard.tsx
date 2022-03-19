@@ -16,7 +16,6 @@ import {
 
 export const BurbsDashboard = (props) => {
   const [userNFTs, setUserNFTs] = useState<Array<String>>(['123', '456']);
-
   const [isLoading, setIsLoading] = useState(true)
 
   const { data, error, isLoading: moralisIsLoading } = useMoralisQuery("_User");
@@ -25,7 +24,7 @@ export const BurbsDashboard = (props) => {
 
   useEffect(() => {
     console.log("running useEffect: ")
-    if (data) {
+    if (data[0]) {
       getUserNFTs()
     }
   }, [data]);
@@ -61,11 +60,15 @@ export const BurbsDashboard = (props) => {
 
   return (
     <Box textAlign='center'>
-          <Heading my={4}>Your Link, ser</Heading>
+      <Heading my={4}>Your Link, ser</Heading>
+      {data.length > 0 &&
+        <Stack>
           <Heading size='md'>address: {data[0].attributes.accounts[0]}</Heading>
           <Heading size='md'>burbs found: {userNFTs.length}</Heading>
+        </Stack>
+      }
 
-<Divider mb={4}/>
+      <Divider mb={4} />
       {isLoading && <Button isLoading={isLoading}></Button>}
       {!isLoading && <Link href={generateRarityUrl()} isExternal>{generateRarityUrl()}</Link>}
     </Box>
