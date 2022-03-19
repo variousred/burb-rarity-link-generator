@@ -2,7 +2,7 @@
   "name": "burbraritylinkgenerator",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://burb-rarity-link.various.red",
+  "homepage": "burb-rarity-link.various.red",
   "dependencies": {
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",
